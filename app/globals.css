@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure html and body take up full viewport and remove default margins/padding */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure body takes full height */
+  width: 100%; /* Ensure body takes full width */
+  /* Removed overflow: hidden to allow scrolling */
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced Life with Style Payment Button */
+.pay-btn {
+  position: relative;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 50%, #3742fa 100%) !important;
+  color: white !important;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(255, 107, 157, 0.3);
+  overflow: hidden;
+}
+
+.pay-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.pay-btn:hover::before {
+  left: 100%;
+}
+
+.pay-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255, 107, 157, 0.4);
+  background: linear-gradient(135deg, #ff8fab 0%, #d55a7a 50%, #4c63ff 100%) !important;
+}
+
+.icon-container {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  color: white !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.default-icon {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Enhanced hover animations */
+.pay-btn:hover .icon {
+  animation: none;
+}
+
+.pay-btn:hover .wallet-icon {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.pay-btn:hover .card-icon {
+  animation: iconRotateLifestyle 2.5s infinite;
+  animation-delay: 0s;
+}
+
+.pay-btn:hover .payment-icon {
+  animation: iconRotateLifestyle 2.5s infinite;
+  animation-delay: 0.5s;
+}
+
+.pay-btn:hover .dollar-icon {
+  animation: iconRotateLifestyle 2.5s infinite;
+  animation-delay: 1s;
+}
+
+.pay-btn:hover .check-icon {
+  animation: iconRotateLifestyle 2.5s infinite;
+  animation-delay: 1.5s;
+}
+
+/* Active state - show only checkmark */
+.pay-btn:active .icon {
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.pay-btn:active .check-icon {
+  animation: checkmarkAppearLifestyle 0.6s ease forwards;
+  visibility: visible;
+}
+
+.btn-text {
+  font-weight: 600;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: white !important;
+  letter-spacing: 0.5px;
+}
+
+@keyframes iconRotateLifestyle {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px) scale(0.3) rotate(-180deg);
+  }
+  5% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  15% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1.1) rotate(10deg);
+  }
+  20% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px) scale(0.3) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-15px) scale(0.3) rotate(180deg);
+  }
+}
+
+@keyframes checkmarkAppearLifestyle {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-45deg);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.3) rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Specific class to prevent scrolling only on main page if needed */
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff6b9d, #c44569);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff8fab, #d55a7a);
+}
